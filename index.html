@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="game-container">
+
+    <h1>🪨 Rock Paper Scissors ✂️</h1>
+
+    <p class="mode">Best of 5</p>
+
+    <div class="score-board">
+
+        <div class="score-box">
+            <h3>👤 Player</h3>
+            <div class="score" id="playerScore">0</div>
+        </div>
+
+        <div class="score-box">
+            <h3>💻 Computer</h3>
+            <div class="score" id="computerScore">0</div>
+        </div>
+
+    </div>
+
+    <h3>Round: <span id="round">0</span> / 5</h3>
+
+    <h2>Choose your move</h2>
+
+    <div class="buttons">
+        <button onclick="playGame('Rock')">🪨 Rock</button>
+        <button onclick="playGame('Paper')">📄 Paper</button>
+        <button onclick="playGame('Scissors')">✂️ Scissors</button>
+    </div>
+
+    <div id="result">
+        Choose Rock, Paper or Scissors
+    </div>
+
+    <h2>📜 Game History</h2>
+
+    <table id="historyTable">
+        <thead>
+            <tr>
+                <th>Round</th>
+                <th>Player</th>
+                <th>Computer</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+
+        <tbody id="historyBody"></tbody>
+    </table>
+
+    <button class="new-game" onclick="newGame()">
+        🔄 New Game
+    </button>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
