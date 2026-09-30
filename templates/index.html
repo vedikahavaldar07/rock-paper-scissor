@@ -1,66 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Rock Paper Scissors</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<div class="game-container">
+<div class="container">
 
     <h1>🪨 Rock Paper Scissors ✂️</h1>
 
-    <p class="mode">Best of 5</p>
+    <p class="subtitle">Play against the computer</p>
 
-    <div class="score-board">
+    <!-- GAME SETTINGS -->
+    <div id="setup">
 
-        <div class="score-box">
-            <h3>👤 Player</h3>
-            <div class="score" id="playerScore">0</div>
+        <h2>Game Settings</h2>
+
+        <label for="difficulty">Select Difficulty:</label>
+
+        <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <br><br>
+
+        <label for="rounds">Select Number of Rounds:</label>
+
+        <select id="rounds">
+            <option value="3">3 Rounds</option>
+            <option value="5" selected>5 Rounds</option>
+            <option value="7">7 Rounds</option>
+        </select>
+
+        <br><br>
+
+        <button onclick="startGame()" class="start-btn">
+            Start Game
+        </button>
+
+    </div>
+
+
+    <!-- GAME AREA -->
+    <div id="game" class="hidden">
+
+        <div class="game-info">
+
+            <p>
+                Difficulty:
+                <span id="currentDifficulty">Easy</span>
+            </p>
+
+            <p>
+                Round:
+                <span id="currentRound">1</span>
+                /
+                <span id="totalRounds">5</span>
+            </p>
+
         </div>
 
-        <div class="score-box">
-            <h3>💻 Computer</h3>
-            <div class="score" id="computerScore">0</div>
+
+        <!-- SCORE -->
+        <div class="score-board">
+
+            <div class="score-box">
+                <h3>You</h3>
+                <span id="playerScore">0</span>
+            </div>
+
+            <div class="score-box">
+                <h3>Computer</h3>
+                <span id="computerScore">0</span>
+            </div>
+
+            <div class="score-box">
+                <h3>Draws</h3>
+                <span id="drawScore">0</span>
+            </div>
+
+        </div>
+
+
+        <h2>Choose Your Move</h2>
+
+
+        <div class="choices">
+
+            <button onclick="playRound('rock')" class="choice-btn">
+                🪨
+                <span>Rock</span>
+            </button>
+
+            <button onclick="playRound('paper')" class="choice-btn">
+                📄
+                <span>Paper</span>
+            </button>
+
+            <button onclick="playRound('scissors')" class="choice-btn">
+                ✂️
+                <span>Scissors</span>
+            </button>
+
+        </div>
+
+
+        <!-- ROUND RESULT -->
+        <div id="roundResult" class="result">
+            Choose Rock, Paper or Scissors
+        </div>
+
+
+        <div class="moves">
+
+            <p>
+                Your Choice:
+                <strong id="playerChoice">-</strong>
+            </p>
+
+            <p>
+                Computer Choice:
+                <strong id="computerChoice">-</strong>
+            </p>
+
         </div>
 
     </div>
 
-    <h3>Round: <span id="round">0</span> / 5</h3>
 
-    <h2>Choose your move</h2>
+    <!-- FINAL RESULT -->
+    <div id="finalResult" class="hidden">
 
-    <div class="buttons">
-        <button onclick="playGame('Rock')">🪨 Rock</button>
-        <button onclick="playGame('Paper')">📄 Paper</button>
-        <button onclick="playGame('Scissors')">✂️ Scissors</button>
+        <h2>🏆 Game Over!</h2>
+
+        <div id="winnerMessage"></div>
+
+        <div class="final-score">
+
+            <p>Your Score: <strong id="finalPlayerScore">0</strong></p>
+
+            <p>
+                Computer Score:
+                <strong id="finalComputerScore">0</strong>
+            </p>
+
+            <p>
+                Draws:
+                <strong id="finalDrawScore">0</strong>
+            </p>
+
+        </div>
+
+        <button onclick="replayGame()" class="replay-btn">
+            🔄 Replay Last Game
+        </button>
+
+        <button onclick="newGame()" class="new-btn">
+            🎮 New Game
+        </button>
+
     </div>
 
-    <div id="result">
-        Choose Rock, Paper or Scissors
+
+    <!-- GAME HISTORY -->
+    <div class="history-section">
+
+        <h2>📜 Game History</h2>
+
+        <div id="history">
+            <p>No games played yet.</p>
+        </div>
+
+        <button onclick="clearHistory()" class="clear-btn">
+            Clear History
+        </button>
+
     </div>
-
-    <h2>📜 Game History</h2>
-
-    <table id="historyTable">
-        <thead>
-            <tr>
-                <th>Round</th>
-                <th>Player</th>
-                <th>Computer</th>
-                <th>Result</th>
-            </tr>
-        </thead>
-
-        <tbody id="historyBody"></tbody>
-    </table>
-
-    <button class="new-game" onclick="newGame()">
-        🔄 New Game
-    </button>
 
 </div>
+
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 
